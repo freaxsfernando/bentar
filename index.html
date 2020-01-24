@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BENTAR bengkel sekitar</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/full-width-pics.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-warning fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">BENTAR</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  </nav>
+
+  <!-- Header - set the background image for the header in the line below -->
+  <header class="py-5 bg-image-full" style="background-image: url('https://images.pexels.com/photos/1599/building-vehicle-motorbike-motorcycle.jpg?cs=srgb&dl=cafe-racer-frame-garage-making-1599.jpg&fm=jpg');">
+  </header>
+
+  <!-- Content section -->
+  <section class="py-5">
+    <div class="container">
+      <h1>B E N T A R</h1>
+      <p class="lead">Bengkel sekitar.</p>
+      <p>semoga web ini dapat membantu anda dalam merawat kendaraaan anda.</p>
+    </div>
+  </section>
+<!-- MAPS -->
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[ArUl5leE_XdP3BFj7dIT4_owx3zKkwdwz5MVtptop-FkejMfBU6IYHVZ1-FtgMHb]' async defer></script>
+    <script type='text/javascript'>
+    function GetMap()
+    {
+    var map = new Microsoft.Maps.Map('#myMap', {
+    credentials: 'ArUl5leE_XdP3BFj7dIT4_owx3zKkwdwz5MVtptop-FkejMfBU6IYHVZ1-FtgMHb',
+    center: new Microsoft.Maps.Location(3.592679, 98.611477),
+    mapTypeId: Microsoft.Maps.MapTypeId.road,
+    zoom: 15
+    });
+          var customLabel = {
+        Bengkel: {
+          label: 'BP'
+        },
+        ShowRoom: {
+          label: 'SM'
+        }
+      };
+ downloadUrl('https://gmapgis.000webhostapp.com/marker.php', function(data) {
+            var xml = data.responseXML;
+            var markers = xml.documentElement.getElementsByTagName('marker');
+            Array.prototype.forEach.call(markers, function(markerElem) {
+              var id = markerElem.getAttribute('id');
+              var name = markerElem.getAttribute('name');
+              var address = markerElem.getAttribute('address');
+              var telp =markerElem.getAttribute('telp');
+              var jam =markerElem.getAttribute('jam_buka')
+              var type = markerElem.getAttribute('type');
+              var point = new Microsoft.Maps.Location(
+                  parseFloat(markerElem.getAttribute('lat')),
+                  parseFloat(markerElem.getAttribute('lng')));
+                var infobox = new Microsoft.Maps.Infobox;
+              var infowincontent = document.createElement('div');
+              var strong = document.createElement('strong');
+              strong.textContent = name
+              infowincontent.appendChild(strong);
+              infowincontent.appendChild(document.createElement('br'));
+
+              var text = document.createElement('text');
+              text.textContent = address
+              infowincontent.appendChild(text);
+              var icon = customLabel[type] || {};
+              var marker = new Microsoft.Maps.Pushpin(point);
+              Microsoft.Maps.Events.addHandler(marker, 'mouseover', displayInfobox);
+              //Microsoft.Maps.Events.addHandler(marker, 'mouseout', closeInfobox);
+               map.entities.push(marker);
+        function displayInfobox(e) {
+            var pin = e.target;
+             infobox.setLocation(pin.getLocation());
+             pin.description = '<h3>'+ name +'</h3>'+ 'alamat:' + address + '<br>' + 'telp: ' + telp + '<br>' + 'jam buka: ' + jam +'<br>' + 'Jenis Bengkel:'+ type;
+            infobox.setOptions({
+                text:icon.label,
+                title:pin.name,
+                description: pin.description,
+                visible: true
+            });
+            infobox.setMap(map);
+    }
+        function closeInfobox() {
+        infobox.setOptions({ visible: false });
+    }
+            });
+          });
+        }
+        function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+            new ActiveXObject('Microsoft.XMLHTTP') :
+            new XMLHttpRequest;
+
+ request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+            request.onreadystatechange = doNothing;
+            callback(request, request.status);
+          }
+        };
+
+        request.open('GET', url, true);
+        request.send(null);
+      }
+
+      function doNothing() {}
+    </script>
+</head>
+<body>
+    <center>
+    <div id="myMap" style="position:relative;width:80%
+     ;height:650px;"></div>
+    </center>
+</body>
+</html>
+<!-- AKHIR MAPS 
+-->
+  <!-- Footer -->
+  <footer class="py-4 bg-warning">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; BENTAR 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
